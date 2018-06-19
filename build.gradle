@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+jar {
+    baseName='spock-my-study'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    // Spock basic dependencies:
+    testCompile "org.codehaus.groovy:groovy-all:2.4.1"
+    // The version has to be compatible with Groovy
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+
+    // Optional dependencies Spock to use Hamcrest matchers:
+    testCompile "org.hamcrest:hamcrest-core:1.3"
+
+    // to mock classes:
+    testRuntime "cglib:cglib-nodep:3.1"
+    // use with cglib to mock classes without default constructor
+    testRuntime "org.objenesis:objenesis:2.1"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.6'
+}
